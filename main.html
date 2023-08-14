@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Practica canvas, CruzMorenoJesusEnrique</title>
+</head>
+
+<body style="background-color: aliceblue;">
+<canvas id="canvas01" width = "1000" height = "1000" style="border:1px dashed blue;">
+</canvas>
+</body>
+
+<script>
+    var canvas = document.getElementById('canvas01');
+    var ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = "lightblue";
+    ctx.fillRect(5, 5, 200, 100);
+
+    ctx.fillStyle = "blue";
+    ctx.fillRect(190, 90, 200, 100);
+
+    ctx.fillStyle = "purple";
+    ctx.fillRect(380, 180, 200, 100);
+
+</script>
+
+</html>
