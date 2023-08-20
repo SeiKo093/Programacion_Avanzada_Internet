@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Practica Canvas3, CruzMorenoJesusEnrique</title>
+</head>
+
+<body style="background-color: aliceblue;">
+<canvas id="canvas01" width = "1000" height = "1000">
+</canvas>
+
+<img id="img" src="im.png" style="display: inline">
+</body>
+
+<script>
+    var canvas = document.getElementById('canvas01');
+    var ctx = canvas.getContext('2d');
+
+    
+
+
+    ctx.fillStyle = "red";
+    ctx.font = "50px Arial";
+    ctx.fillText("AAAAAAAAAAAAAAAAAAAAAA", 50, 50);
+
+    ctx.fillStyle = "blue";
+    ctx.strokeText("AAAAAAAAAAAAAAAAAAAAAA", 51, 51);
+
+    var gradi = ctx.createLinearGradient(200,300,500,300);
+
+    gradi.addColorStop(0,"Cyan");
+    gradi.addColorStop(1,"Purple");
+
+    ctx.fillStyle = gradi;
+    ctx.fillRect(70,65,500,300);
+
+    var gradi2 = ctx.createRadialGradient(300,620, 30,500,300, 500);
+
+    gradi2.addColorStop(0,"aliceblue");
+    gradi2.addColorStop(1,"red");
+
+    ctx.fillStyle = gradi2;
+    ctx.fillRect(70,465,500,300);
+    ctx.closePath();
+    
+    var imag = document.getElementById("img");
+    ctx.beginPath();
+    ctx.drawImage(imag, 200,40,50,70);
+    ctx.closePath();
+
+</script>
+
+</html>
