@@ -1,0 +1,86 @@
+<<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Practica Canvas4, CruzMorenoJesusEnrique</title>
+</head>
+
+<body style="background-color: aliceblue;">
+<canvas id="canvas01" width = "1000" height = "1000">
+</canvas>
+
+</body>
+
+<script>
+    var canvas = document.getElementById('canvas01');
+    var ctx = canvas.getContext('2d');
+
+
+    ctx.fillStyle = "red";
+    ctx.font = "50px Arial";
+    ctx.fillText("AAAAAAAAAAAAAAAAAAAAAA", 50, 50);
+ 
+
+
+    var fig = true;
+    var col;
+    var press = false;
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';}
+
+    canvas.addEventListener("click", (e) => {
+        ctx.fillStyle =col;
+    })
+
+    canvas.addEventListener("mouseover",(e) => {
+        console.log("mouseover");
+        col = random_rgba();  })
+    canvas.addEventListener("mouseout", (e) =>{
+        fig = !fig; })
+
+    canvas.addEventListener("mousemove", (e) =>{
+        if(press){
+            ctx.beginPath();
+        ctx.arc(e.offsetX, e.offsetY,2,0, 2* Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath(); 
+    
+
+        var x = Math.floor(Math.random() * 5);
+        console.log(x);
+        if(x == 1){
+            if(fig){
+            
+            ctx.beginPath();
+            ctx.arc(e.offsetX, e.offsetY,40,0, 2* Math.PI);
+            ctx.fill(); ctx.stroke();
+            ctx.closePath();
+        }else{
+            ctx.beginPath();
+            ctx.fillRect (e.offsetX-25, e.offsetY-25  , 50, 50);
+            ctx.strokeRect(e.offsetX-25, e.offsetY-25,50,50);  
+            ctx.closePath();  
+
+        } 
+        }
+
+    
+    }
+        })
+
+
+        canvas.addEventListener("mousedown",(event)=> {
+            press = true;
+        });
+
+        canvas.addEventListener("mouseup",(event)=> {
+            press = false;
+        });
+
+</script>
+
+</html>
