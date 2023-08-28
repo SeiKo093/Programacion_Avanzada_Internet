@@ -1,0 +1,120 @@
+<<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Practica Canvas5, CruzMorenoJesusEnrique</title>
+</head>
+
+<body style="background-color: aliceblue;">
+    <center><canvas id="canvas01" width = "500" height = "500">
+</canvas></center>
+
+</body>
+
+<script>
+window.requestAnimationFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 17);
+        };
+}());
+
+window.requestAnimationFrame(update);
+
+    var canvas = document.getElementById('canvas01');
+    var ctx = canvas.getContext('2d');
+
+
+    ctx.fillStyle = "red";
+    ctx.font = "50px Arial";
+    ctx.fillText("AAAAAAAAAAAAAAAAAAAAAA", 50, 50);
+    var col;
+    var dir;
+
+    var x=225; var y=225;
+
+   
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';}
+
+
+
+
+        document.addEventListener("keydown",(event)=> {
+        
+            switch (event.keyCode) {
+            case 87:
+                dir = 0;
+                //y -= 8;
+                break;
+
+            case 83:
+                dir = 1
+                //y += 8;
+                break;
+
+            case 68:
+                dir = 2;
+                //x += 8;
+                break;
+
+                case 65:
+                dir = 3; 
+                //x -= 8;
+                break;
+
+            default:
+                break;
+            }
+
+           // repaint();
+        }); 
+
+
+function update(){
+    switch (dir) {
+            case 0:  
+                y -= 8;
+                if(y<-50){y=520}
+                break;
+
+            case 1:
+                y += 8;
+                if(y>520){y=-50}
+                break;
+
+            case 2:
+                x += 8;
+                if(x>520){x=-50}
+                break;
+
+                case 3:
+                x -= 8;
+                if(x<-50){x=520}
+                break;
+
+            default:
+                break;
+            }
+repaint();
+window.requestAnimationFrame(update);
+}
+
+function repaint(){
+     
+    ctx.fillStyle = "aliceblue";
+    ctx.fillRect ( 0, 0,1000,1000);
+                ctx.fillStyle = random_rgba();
+            ctx.fillRect ( x, y,40,40);
+}
+
+
+
+</script>
+
+</html>
