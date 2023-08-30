@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paisaje</title>
+
+</head>
+<body style="background-color: aliceblue;">
+<canvas id="canvas01"></canvas>
+<script>
+  const canvas = document.getElementById('canvas01');
+  const ctx = canvas.getContext('2d');
+
+  // Set canvas size
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // CIELO
+  ctx.fillStyle = '#87CEEB'; 
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // SOL
+  ctx.fillStyle = '#FFD700';
+  ctx.beginPath();
+  ctx.arc(100, 100, 50, 0, Math.PI * 2);
+  ctx.fill();
+
+  //NIEVE
+  ctx.fillStyle = '#FFFFFF'; // BLANCO
+  for (let i = 0; i < canvas.width; i += 40) {
+    ctx.beginPath();
+    ctx.moveTo(i, canvas.height - 200);
+    ctx.lineTo(i + 20, canvas.height - 220);
+    ctx.lineTo(i + 40, canvas.height - 200);
+    ctx.lineTo(i + 60, canvas.height - 220);
+    ctx.lineTo(i + 80, canvas.height - 200);
+    ctx.lineTo(i + 80, canvas.height);
+    ctx.lineTo(i, canvas.height);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  //MUÑECO DE NIEVE
+  ctx.beginPath();
+  ctx.arc(300, 495, 45, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(300, 430, 35, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = 'BLACK';
+  ctx.beginPath();
+  ctx.arc(285, 420, 8, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(330, 420, 8, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fill();
+
+
+//Bolitas de nieve al azar
+ctx.fillStyle = '#FFFFFF';
+for (let i = 0; i < 40; i += 1) {
+  ctx.beginPath();
+  ctx.arc( Math.floor(Math.random() * canvas.width),Math.floor(Math.random() * canvas.height), 5, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fill();
+}
+
+</script>
+</body>
+</html>
