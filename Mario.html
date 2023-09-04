@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paisaje</title>
+
+</head>
+<body style="background-color: aliceblue;">
+  <center><canvas id="canvas01"></canvas></center>
+</body>
+
+<script>
+  const canvas = document.getElementById('canvas01');
+  const ctx = canvas.getContext('2d');
+
+  // Set canvas size
+  canvas.width = 850;
+  canvas.height = 500;
+
+
+  function creaTuberia(x, y, width, height, baseColor, highColor){
+    //BASE
+    ctx.fillStyle = baseColor;
+    ctx.fillRect(x, y, width, height);
+    ctx.fillStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, width, height); //BORDE Negro
+    //BASE HIGHLIGHTS
+    ctx.fillStyle = highColor;
+    ctx.fillRect(x+15, y, 10, height-1);
+    ctx.fillRect(x+11, y, 2, height-1);
+    ctx.fillRect(x+30, y, 2, height-1);
+    ctx.fillRect(x+52, y, 5, height-1);
+
+    ctx.fillStyle = "Black";
+    ctx.fillRect(x+width-10, y, 10, height-1);
+    ctx.fillRect(x+width-30, y, 18, height-1);
+
+    //Parte de Arriba
+    ctx.fillStyle = baseColor;
+    ctx.fillRect(x-10, y-42, width+20, 40);
+
+    ctx.fillStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x-10, y-42, width+20, 40); //BORDE Negro
+    ctx.fillRect(x-10, y-3, width+20, 3);
+    ctx.strokeRect(x-10, y-3, width+20, 3); //BORDE Negro
+    ctx.lineWidth = 1;
+
+    //Parte de Arriba HIGHLIGHTS
+    ctx.fillStyle = highColor;
+    ctx.fillRect(x+14, y-41, 10, 37);
+    ctx.fillRect(x+7, y-41, 4, 37);
+    ctx.fillRect(x+29, y-41, 3, 37);
+    ctx.fillRect(x+51, y-41, 5, 37);
+
+    ctx.fillStyle = "Black";
+    ctx.fillRect(x+width-6, y-41, 10,37);
+    ctx.fillRect(x+width-26,y-41, 18, 37);
+  }
+
+  function creaBloque(x, y, width, height, baseColor){
+    ctx.fillStyle = baseColor;
+    ctx.fillRect(x, y, width, height);  // Color Base
+    ctx.fillStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, width, height); //BORDE Negro
+    ctx.lineWidth = 1;
+  }
+
+  function creaMuro(x, y, width, height, baseColor, shadowColor){
+    ctx.fillStyle = "black";
+    ctx.fillRect(x+20,y+10,width,height-10); //Sombra de atras
+    ctx.fillStyle = baseColor;
+    ctx.fillRect(x, y, width, height);  // Color Base
+    ctx.fillStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, width, height); //BORDE Negro
+    ctx.lineWidth = 1;
+    //Sombras
+    ctx.fillStyle = shadowColor;
+    ctx.fillRect(x+1, y+height-8, width-2, 7); //Parte de abajo
+    ctx.fillRect(x+width-8, y+1, 7, height-2); //Parte Lateral derecha
+     //Bordecitos
+     ctx.fillStyle = "black";
+     ctx.fillRect(x,y,4,4);
+    ctx.fillRect(x,y+height-5,4,4);
+    ctx.fillRect(x+width-4,y,4,4);
+    ctx.fillRect(x+width-4,y+height-4,4,4);
+
+
+    //Circulos
+    var tam = 7; //tamaño, LO PUSE EN 7 PERO SE PUEDE "MOVER"
+    var posx= x+10, posy= y+10; //POSICION, ESTA SE LA VAS A IR CAMBIANDO
+
+    ctx.fillStyle = "#d0d8e2"; //BASE
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "black"; // BORDE
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(posx+tam,posy-tam/2); // Comienza en ESQUINA SUPERIOR DERECHA
+    ctx.lineTo(posx-tam, posy+tam/2); // Línea DIAGONAL HACIA ESQUINA INFERIOR IZQUIERDA
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1; // Ancho de la línea
+    ctx.stroke();
+
+    posx=x+width-10, posy=y+10;
+
+    ctx.fillStyle = "#d0d8e2";
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(posx+tam,posy-tam/2); // Comienza en el centro del círculo
+    ctx.lineTo(posx-tam, posy+tam/2); // Línea vertical hacia abajo
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1; // Ancho de la línea
+    ctx.stroke();
+
+    posx=x+width-10, posy=y+height-10;
+
+    ctx.fillStyle = "#d0d8e2";
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(posx+tam,posy-tam/2); // Comienza en el centro del círculo
+    ctx.lineTo(posx-tam, posy+tam/2); // Línea vertical hacia abajo
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1; // Ancho de la línea
+    ctx.stroke();
+
+    posx=x+10, posy=y+height-10;
+
+    ctx.fillStyle = "#d0d8e2";
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(posx, posy, tam, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(posx+tam,posy-tam/2); // Comienza en el centro del círculo
+    ctx.lineTo(posx-tam, posy+tam/2); // Línea vertical hacia abajo
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1; // Ancho de la línea
+    ctx.stroke();
+  }
+
+// Fondo
+ctx.fillStyle = '#b2eefe'; 
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+//Muros
+creaMuro(300,canvas.height-250-70,150,250,"#84c0fe","#1592e7");//Azul
+creaMuro(200,canvas.height-150-70,150,150,"#ffc3b8","#ec956c");//Naranja
+creaMuro(750,canvas.height-150-70,150,150,"#51d96b","#288432");//Verde
+
+//Tuberia
+creaTuberia(600,canvas.height-120-70,90,120,"#1b880c","#61d673");
+
+//BloquesAire
+creaBloque(150,50,45,45,"#fe8e5e");
+creaBloque(195,50,45,45,"#fe8e5e");
+creaBloque(50,225,45,45,"#fe8e5e");
+creaBloque(785,150,45,45,"#fe8e5e");
+
+// Suelo
+// ------- BASESUELO
+ctx.fillStyle = '#f2cdb5';
+ctx.fillRect(0, canvas.height-70, canvas.width, 70);
+ctx.strokeRect(0, canvas.height-70, canvas.width, 70);
+ctx.lineWidth = 3;
+ctx.strokeRect(0, canvas.height-50, canvas.width, 700); //BORDE Negro
+ctx.lineWidth = 1;
+// ------- FONDOSUELO
+ctx.fillStyle = '#f99e76';
+ctx.fillRect(0, canvas.height-50, canvas.width, 70);
+
+
+
+
+//NIEVE
+ctx.fillStyle = '#FFFFFF'; // BLANCO
+for (let i = 0; i < canvas.width; i += 40) {
+
+}
+
+</script>
+
+</html>
