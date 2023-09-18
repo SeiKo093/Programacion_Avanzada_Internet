@@ -1,0 +1,18 @@
+[
+{
+    "name":"Enrique",
+    "lastname":"Cruz",
+    "email":"jcruz_20@alu.uabcs.mx",
+    "password":"1234",
+    "role_id": 1,
+    "avatar":""
+},
+{
+    "name":"Pollo",
+    "lastname":"Asado",
+    "email":"critico_20@alu.uabcs.mx",
+    "password":"12345",
+    "role_id": 2,
+    "avatar":""
+}
+]

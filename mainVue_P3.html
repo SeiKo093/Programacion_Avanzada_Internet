@@ -1,0 +1,82 @@
+<<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practica Vue03, CruzMorenoJesusEnrique</title>
+  </head>
+
+  <body style="background-color: rgb(209, 224, 227)">
+    
+    <div class="container" id="container_app">
+
+        <form>
+            <fieldset>
+                <legend>
+                    Email:
+                </legend>
+                <input type="email" placeholder="Pon tu email aqui" v-model="email" email="">
+            </fieldset>
+
+            <fieldset>
+                <legend>
+                    Contraseña:
+                </legend>
+                <input type="password" placeholder="Pon tu contraseña aqui" v-model="password" password="">
+            </fieldset>
+
+              
+                <button type="button" v-on:click="login">Login</button>
+
+        </form>
+    </div>
+  </body>
+
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="text/javascript">
+    //SCRIPT 
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup() {
+        users = ref([]);
+        email = ref(''); password = ref('');
+        return {
+            users,
+            email,
+            password
+        }
+      },
+      methods:{
+        async login(){
+            const response = await fetch("users.json");
+            const users_r = await response.json();
+            console.log(users_r);
+
+            let loginEmail = false, loginPass = false;
+
+          
+
+            users_r.forEach((user) => {
+                if(this.email == user.email){
+                    alert("Se encontro un Email");
+                    loginEmail = true;
+                }else{
+                    alert("No hay un Email registradooooooooooooooo");
+                }                
+                if(loginEmail){
+                    if(this.password == user.password){
+                        alert("La Contraseña es correcta");
+                        //loginPass = true;
+                    }else{
+                       // alert("La contraseña en incorrecta");
+                    }
+                }
+            });
+        }
+      }
+    }).mount('#container_app')
+
+  </script>
+</html>
