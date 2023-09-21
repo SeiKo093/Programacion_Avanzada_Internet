@@ -1,0 +1,170 @@
+<<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practica Vue03, CruzMorenoJesusEnrique</title>
+  <style type="text/css">
+    table.customTable {
+      width: 100%;
+      background-color: #FFFFFF;
+      border-collapse: collapse;
+      border-width: 2px;
+      border-color: #7EA8F8;
+      border-style: solid;
+      color: #000000;
+    }
+    
+    table.customTable td, table.customTable th {
+      border-width: 2px;
+      border-color: #7EA8F8;
+      border-style: solid;
+      padding: 5px;
+    }
+    
+    table.customTable thead {
+      background-color: #7EA8F8;
+    }
+    
+  </style>
+
+  </head>
+
+  <body style="background-color: rgb(209, 224, 227)">
+    
+    <div class="container" id="container_app">
+        <form v-if="!is_login">
+            <fieldset>
+                <legend>
+                    Email:
+                </legend>
+                <input type="email" placeholder="Pon tu email aqui" v-model="email" email="">
+            </fieldset>
+
+            <fieldset>
+                <legend>
+                    Contraseña:
+                </legend>
+                <input type="password" placeholder="Pon tu contraseña aqui" v-model="password" password="">
+            </fieldset>
+
+              
+                <button type="button" v-on:click="login">Login</button>
+        </form>
+
+        <table class="customTable"  v-if="is_login">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Correo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="u in users">
+              <td>{{u.name}}</td>
+              <td>{{u.lastname}}</td>
+              <td>{{u.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button v-if="is_login" @click="cerrar"> CERRAR SESION </button>
+
+    </div>
+
+    
+  </body>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="text/javascript">
+    //SCRIPT 
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup() {
+        users = ref([]);
+        email = ref(''); password = ref('');
+
+        //IS LOGIN ---- MAGIA
+
+        is_login = ref('');
+        return {
+            users,
+            email,
+            password,
+            is_login
+        }
+      },
+
+      mounted: function (){
+        this.prueba();
+      },
+      methods:{
+        async login(){
+
+            const response = await fetch("users.json?v=1");
+            const users_r = await response.json();
+            console.log(users_r);
+
+            let loginEmail = false, loginPass = false;
+            
+            
+            users_r.forEach((user) => {
+              if(this.email == user.email){
+                  alert("Se encontro un Email");
+                  loginEmail = true;
+              }else{
+                 // alert("No hay un Email registradooooooooooooooo");
+              }                
+              if(loginEmail){
+                  if(this.password == user.password){
+                      alert("La Contraseña es correcta");
+
+                      localStorage.setItem("user_data",JSON.stringify(users_r));
+                      localStorage.setItem("is_login","true");
+
+                      this.update(users_r);
+
+                      this.is_login = true;
+                  }else{
+                     // alert("La contraseña en incorrecta");
+                  }
+              }
+          });
+          
+
+            
+        },
+
+        async load(){
+          const response = await fetch("users.json?v=1");
+          const users_r = await response.json();
+          localStorage.setItem("user_data",JSON.stringify(users_r));
+          this.update(users_r);
+        },
+
+        async prueba(){
+          this.is_login = await localStorage.getItem("is_login");
+          if(this.is_login == "false" ||this.is_login ==  null){
+            this.is_login = false;
+          }
+          this.load();
+        },
+
+        update(users){
+          console.log("aaaaaaaaaaaaaaa");
+          this.users = users;
+        },
+
+        cerrar(){
+          console.log("ADIOSPAPU");
+          localStorage.setItem("is_login","false");
+          this.is_login = false;
+        }
+        
+      }
+    }).mount('#container_app')
+
+  </script>
+</html>
