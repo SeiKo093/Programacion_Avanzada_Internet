@@ -1,0 +1,36 @@
+@maincolor: rgb(236, 239, 244);
+@colores: rgb(163, 194, 242),rgb(23, 214, 160),rgb(120, 229, 220), rgb(14, 57, 124), rgb(221, 224, 56);
+
+
+.prueba(@bg:rgb(150, 150, 223)){
+   background-color: @bg;
+}
+
+.colorear-lista(@colores, @i:1) when (@i <= 5){
+.li-@{i}{
+    background-color: extract(@colores,@i);
+    border-style: dotted;
+    border-width: 1px;
+}
+.colorear-lista(@colores, @i + 1) 
+}
+
+body{
+background: white;
+
+.container{
+    width: 70%;
+    margin: auto;
+    form{
+        background-color: @maincolor;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .tt{
+        .prueba();
+    }
+    
+    .colorear-lista(@colores, 1);
+}
+
+}

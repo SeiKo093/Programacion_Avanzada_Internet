@@ -1,0 +1,40 @@
+body {
+  background: white;
+}
+body .container {
+  width: 70%;
+  margin: auto;
+}
+body .container form {
+  background-color: #eceff4;
+  border-radius: 5px;
+  padding: 20px;
+}
+body .container .tt {
+  background-color: #9696df;
+}
+body .container .li-1 {
+  background-color: #a3c2f2;
+  border-style: dotted;
+  border-width: 1px;
+}
+body .container .li-2 {
+  background-color: #17d6a0;
+  border-style: dotted;
+  border-width: 1px;
+}
+body .container .li-3 {
+  background-color: #78e5dc;
+  border-style: dotted;
+  border-width: 1px;
+}
+body .container .li-4 {
+  background-color: #0e397c;
+  border-style: dotted;
+  border-width: 1px;
+}
+body .container .li-5 {
+  background-color: #dde038;
+  border-style: dotted;
+  border-width: 1px;
+}
